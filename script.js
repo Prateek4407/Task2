@@ -1,16 +1,15 @@
 console.log("script connected");
 
-// ---------- 2.1 Data model: the single source of truth ----------
 let students = [
   { id: 1, name: "Prateek", age: 20, course: "BTech" },
   { id: 2, name: "Mayank", age: 21, course: "BTech" },
   { id: 3, name: "Prabal", age: 21, course: "BTech" },
 ];
 
-// Tracks whether the form is currently in "edit" mode, and which id
+
 let editingId = null;
 
-// ---------- DOM references ----------
+
 const studentList = document.querySelector("#student-list");
 const studentForm = document.querySelector("#student-form");
 const nameInput = document.querySelector("#name");
@@ -19,7 +18,7 @@ const courseInput = document.querySelector("#course");
 const errorMessage = document.querySelector("#error-message");
 const submitBtn = document.querySelector("#submit-btn");
 
-// ---------- Helpers ----------
+
 const showError = (message) => {
   errorMessage.textContent = message;
   errorMessage.classList.remove("hidden");
@@ -29,18 +28,15 @@ const hideError = () => {
   errorMessage.textContent = "";
   errorMessage.classList.add("hidden");
 };
-
-// ---------- 2.1 Render ----------
 function render() {
-  // clear whatever the list currently contains
+  
   studentList.innerHTML = "";
 
-  // loop through the students array (map) and build an <li> for each
+  
   students.map(({ id, name, age, course }) => {
     const li = document.createElement("li");
     li.className = "student-item";
 
-    // template literal for the displayed text
     li.innerHTML = `
       <span class="student-info">${name} — ${age} yrs — ${course}</span>
     `;
@@ -67,19 +63,19 @@ function render() {
   });
 }
 
-render(); // call once so the page shows the starting students
+render(); 
 
-// ---------- 2.2 Add Student (and 2.4 Edit, same form) ----------
+
 studentForm.addEventListener("submit", (e) => {
   e.preventDefault();
   hideError();
 
-  // destructure the raw values off the inputs
+
   const { value: name } = nameInput;
   const { value: ageRaw } = ageInput;
   const { value: course } = courseInput;
 
-  // ---- 2.5 Validation ----
+ 
   if (!name.trim() || !ageRaw.trim() || !course.trim()) {
     showError("Please fill in name, age, and course before submitting.");
     return;
@@ -92,14 +88,14 @@ studentForm.addEventListener("submit", (e) => {
   }
 
   if (editingId !== null) {
-    // ---- 2.4 Update existing student ----
+    
     students = students.map((student) =>
       student.id === editingId ? { ...student, name, age, course } : student
     );
     editingId = null;
     submitBtn.textContent = "Add Student";
   } else {
-    // ---- 2.2 Create new student ----
+    
     const newId =
       students.length > 0 ? Math.max(...students.map((s) => s.id)) + 1 : 1;
 
@@ -111,11 +107,11 @@ studentForm.addEventListener("submit", (e) => {
   studentForm.reset();
 });
 
-// ---------- 2.3 Delete a Student ----------
+
 const deleteStudent = (id) => {
   const exists = students.find((student) => student.id === id);
   if (!exists) {
-    // handle gracefully if the id no longer exists
+    
     showError("That student no longer exists.");
     return;
   }

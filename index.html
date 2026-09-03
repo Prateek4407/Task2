@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Student Manager</h1>
+
+    <!-- Add / Edit Student Form -->
+    <form id="student-form">
+      <input type="text" id="name" placeholder="Name" />
+      <input type="text" id="age" placeholder="Age" />
+      <input type="text" id="course" placeholder="Course" />
+      <button type="submit" id="submit-btn">Add Student</button>
+    </form>
+
+    <!-- Inline validation message (hidden by default) -->
+    <p id="error-message" class="error-message hidden"></p>
+
+    <!-- Student list gets rendered here -->
+    <ul id="student-list"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

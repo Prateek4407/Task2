@@ -121,7 +121,7 @@ const deleteStudent = (id) => {
   render();
 };
 
-// ---------- 2.4 Start editing a student ----------
+
 const startEdit = (id) => {
   const student = students.find((student) => student.id === id);
 
